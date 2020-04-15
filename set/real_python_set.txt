@@ -1,0 +1,66 @@
+Set characteristics:
+- Sets are unordered.
+- Set elements are unique. Duplicate elements are not allowed.
+- A set itself may be modified, but the elements contained in the set must 
+  be of an immutable type.
+- Sets can’t be indexed or sliced
+- Elements in a set can be objects of different types:
+	x = {42, 'foo', 3.14159, None}
+- Methods will typically accept any iterable as an argument, but operators 
+  require actual sets as operands.
+
+Creation:
+x = set(<iter>) or x = {<obj>, <obj>, ..., <obj>}
+	Examples:
+x = set(('foo', 'bar', 'baz', 'foo', 'qux')) # {'qux', 'foo', 'bar', 'baz'}
+s = set('quux') # {'x', 'u', 'q'}
+x = set() # creating an empty set
+
+- Most, though not quite all, set operations in Python can be performed in two 
+  different ways: by operator or by method.
+	set3 = set1 | set2 or set = set1.union(set2)
+  HOWEVER, when you use the | operator, both operands must be sets. The .union()
+  method, on the other hand, will take any iterable as an argument, convert it
+  to a set, and then perform the union !!! 
+
+x1.isdisjoint(x2) - Determines whether or not two sets have any elements in
+	common, returns True if x1 and x2 have no elements in common
+
+x1 < x2 # Determines whether one set is a proper subset of the other. A proper
+	subset is the same as a subset, except that the sets can’t be identical.
+
+MODYFING A SET
+
+Each of the union, intersection, difference, and symmetric difference operators
+has an AUGMENTED assignment form that can be used to modify a set.
+
+Example:
+x1.intersection_update(x2[, x3 ...])
+x1 &= x2 [& x3 ...] # Modify a set by intersection.
+
+FROZEN SETS
+
+Python provides another built-in type called a frozenset, which is in all 
+respects exactly like a set, except that a frozenset is immutable. You can 
+perform non-modifying operations on a frozenset.
+
+Creation:
+f = frozenset(['foo', 'bar', 'baz'])
+
+- methods that attempt to modify a frozenset fail
+- augmented assignments on frozensets can be done in place, what reassigns 
+  a variable to a new location (new id)
+
+Example:
+>>> f = frozenset(['foo', 'bar', 'baz'])
+>>> id(f)
+56992872
+>>> s = {'baz', 'qux', 'quux'}
+
+>>> f &= s
+>>> f
+frozenset({'baz'})
+>>> id(f)
+56992152
+
+
