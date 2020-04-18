@@ -16,7 +16,7 @@ def add_str_nums(s1: str, s2: str) -> str:
             return '-1'
     return str(tot)
 
-print(add_str_nums("", ""))
+
 assert add_str_nums("", "") == "0"
 assert add_str_nums("1", "01") == "2"
 assert add_str_nums("1","") == "1"
