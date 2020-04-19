@@ -78,7 +78,7 @@ def path(array):
     i = len(array) - 1
     j = i
     while i < 0:
-        while j < 0
+        while j < 0:
             if i == len(array) - 1 and j == len(array) -1:
                 memo[i][j] = 1
             elif i == len(array) - 1:
