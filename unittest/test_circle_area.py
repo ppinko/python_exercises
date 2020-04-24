@@ -31,7 +31,7 @@ testing class should be derived from unittest.TestCase
 
 class TestCircle(unittest.TestCase):
     """
-    Test function must statu with word 'test', otherwise it won't be detected
+    Test function must start with word 'test', otherwise it won't be detected
     """
     def test_area(self):
         # Test area when radius >= 0
