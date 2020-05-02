@@ -4,7 +4,6 @@ https://edabit.com/challenge/f6X7pa38iQyoytJgr
 
 
 def increasing_word_weights(txt: str) -> bool:
-    from functools import reduce
     temp = []
     for i in txt.split():
         temp_points = 0
