@@ -22,6 +22,14 @@ def remove_leading_trailing(num: str) -> str:
     return ''.join(temp)
 
 
+""" Alternative solution """
+
+
+def remove_leading_trailing(n):
+    s = str(float(n))
+    return s[:-2] if s.endswith('.0') else s
+
+
 assert remove_leading_trailing("230.000") == "230"
 assert remove_leading_trailing("00402") == "402"
 assert remove_leading_trailing("03.1400") == "3.14"
