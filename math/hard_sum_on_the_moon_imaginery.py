@@ -8,16 +8,7 @@ from itertools import zip_longest
 
 def lunar_sum(a: int, b: int) -> int:
     a_str, b_str = str(a)[::-1], str(b)[::-1]
-    temp = ''
-    for i, j in zip_longest(a_str, b_str):
-        if i is None:
-            temp += j
-        elif j is None:
-            temp += i
-        elif int(i) >= int(j):
-            temp += i
-        else:
-            temp += j
+    temp = ''.join(i if int(i) >= int(j) else j for i, j in zip_longest(a_str, b_str, fillvalue='0'))
     return int(temp[::-1])
 
 
