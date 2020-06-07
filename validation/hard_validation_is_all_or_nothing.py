@@ -15,6 +15,13 @@ def possibly_perfect(answers, keys) -> bool:
     return all(L) or not any(L) or len(L) == 0
 
 
+""" Alternative solution """
+
+
+def possibly_perfect(key, answers):
+	return len(set([a == b for a, b in zip(key, answers) if a != '_'])) == 1
+
+
 assert possibly_perfect(['A', '_', 'C', '_', 'B'], ['A', 'D', 'C', 'E', 'B']) == True
 assert possibly_perfect(['B', '_', 'B'], ['B', 'D', 'C']) == False
 assert possibly_perfect(['T', '_', 'F', 'F', 'F'], ['F', 'F', 'T', 'T', 'T']) == True
