@@ -6,7 +6,11 @@ https://edabit.com/challenge/qLMZ2hEvrhRSSSnQw
 ["this", "is", "a", "small", "test"] ➞ ["a", "is", "test", "this", "small"]
 """
 
-def make_grlex(lst):
-    return sorted(lst, key = str.__gt__)
 
-print(make_grlex(["this", "is", "a", "small", "test"]))
+def make_grlex(lst):
+    L = sorted(lst, key=str.__gt__)
+    return L
+
+
+K = ["this", "is", "a", "small", "test"]
+make_grlex(K)
