@@ -1,17 +1,11 @@
 """ https://pythonprogramming.net/server-chatroom-sockets-tutorial-python-3/?completed=/pickle-objects-sockets-tutorial-python-3/ """
 
 if __name__ == "__main__":
-    import os
     import sys
     import socket
     import select
 
     HEADER_LENGTH = 10
-
-    """
-    IP = "127.0.0.1"
-    PORT = 1234
-    """
 
     IP = sys.argv[1]
     PORT = int(sys.argv[2])

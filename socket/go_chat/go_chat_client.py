@@ -2,7 +2,6 @@
 
 
 if __name__ == "__main__":
-    import os
     import sys
     import socket
     import select
@@ -10,11 +9,6 @@ if __name__ == "__main__":
 
     HEADER_LENGTH = 10
 
-    """
-    Default values:
-        IP = "127.0.0.1"
-        PORT = 1234
-    """
     IP = sys.argv[1]
     PORT = int(sys.argv[2])
     my_username = input("Username: ")
@@ -27,7 +21,7 @@ if __name__ == "__main__":
     # Connect to a given ip and port
     client_socket.connect((IP, PORT))
 
-    # Set connection to non-blocking state, so .recv() call won;t block, just return some exception we'll handle
+    # Set connection to non-blocking state, so .recv() call won't block, just return some exception we'll handle
     client_socket.setblocking(False)
 
     # Prepare username and header and send them
