@@ -42,3 +42,25 @@ def singeNonDuplicate_v1(nums: list[int]) -> int:
 print(singeNonDuplicate_v1([1, 1, 2, 2, 3, 3, 4]))  # 4
 print(singeNonDuplicate_v1([0, 1, 1, 2, 2, 3, 3]))  # 0
 print(singeNonDuplicate_v1([0, 0, 1, 1, 2, 3, 3]))  # 2
+
+
+def singeNonDuplicate_v2(nums: list[int]) -> int:
+    """
+    Using binary search. Complexity O(log n).
+    """
+
+    left, right = 0, len(nums) - 1
+    while left < right:
+        mid = left + (right - left) // 2
+        if mid % 2 == 1:
+            mid -= 1
+        if nums[mid] == nums[mid + 1]:
+            left = mid + 2
+        else:
+            right = mid
+    return nums[left]
+
+
+print(singeNonDuplicate_v2([1, 1, 2, 2, 3, 3, 4]))  # 4
+print(singeNonDuplicate_v2([0, 1, 1, 2, 2, 3, 3]))  # 0
+print(singeNonDuplicate_v2([0, 0, 1, 1, 2, 3, 3]))  # 2
