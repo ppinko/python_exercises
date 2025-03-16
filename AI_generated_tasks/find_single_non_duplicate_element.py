@@ -52,13 +52,14 @@ def singeNonDuplicate_v2(nums: list[int]) -> int:
     left, right = 0, len(nums) - 1
     while left < right:
         mid = left + (right - left) // 2
+        # Ensure mid is even (so we compare valid pairs)
         if mid % 2 == 1:
             mid -= 1
-        if nums[mid] == nums[mid + 1]:
+        if nums[mid] == nums[mid + 1]:  # Single element is on the right
             left = mid + 2
-        else:
+        else:  # Single element is on the left or is mid
             right = mid
-    return nums[left]
+    return nums[left]  # Left and right will meet at the single element
 
 
 print(singeNonDuplicate_v2([1, 1, 2, 2, 3, 3, 4]))  # 4
