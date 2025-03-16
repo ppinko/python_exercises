@@ -20,3 +20,14 @@ def missing_number_in_array(nums: list[int]) -> int:
 nums = [3, 0, 1]
 
 print(missing_number_in_array(nums))
+
+def find_missing_number(nums):
+    '''
+    Sophisticated solution using algorithm for sum on first n natural numbers
+    '''
+    n = len(nums)
+    expected_sum = n * (n + 1) // 2 
+    actual_sum = sum(nums) 
+    return expected_sum - actual_sum
+
+print(find_missing_number(nums))
