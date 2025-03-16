@@ -23,9 +23,10 @@ Constraints:
 
 def first_non_repeating_character(s: str) -> int:
     n = -1
+    lower_cases = s.lower()
     chars_dict = dict()
-    for i, char in enumerate(s):
-        if char in chars_dict.keys():
+    for i, char in enumerate(lower_cases):
+        if char.lower() in chars_dict.keys():
             chars_dict[char].append(i)
         else:
             chars_dict[char] = [i]
@@ -34,7 +35,7 @@ def first_non_repeating_character(s: str) -> int:
 
 s1 = "leetcode"
 s2 = "aabb"
-s3 = "ananas"
+s3 = "aNanas"
 
 print(first_non_repeating_character(s1))
 print(first_non_repeating_character(s2))
