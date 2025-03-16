@@ -33,5 +33,16 @@ def majorityElement(nums: list[int]) -> int:
     return max(counter, key=counter.get)
 
 
-print(majorityElement([3, 2, 3]))  # 3
+print(majorityElement([3, 2, 2, 3, 2]))  # 2
 print(majorityElement([2, 2, 1, 1, 1, 2, 2]))  # 2
+
+
+def majorityElement_2(nums: list[int]) -> int:
+    d = {}
+    for i in nums:
+        d[i] = d.get(i, 0) + 1
+    return max(d, key=d.get)
+
+
+print(majorityElement_2([3, 2, 2, 3, 2]))  # 2
+print(majorityElement_2([2, 2, 1, 1, 1, 2, 2]))  # 2
