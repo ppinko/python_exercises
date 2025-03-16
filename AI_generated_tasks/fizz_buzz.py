@@ -29,6 +29,7 @@ FizzBuzz
 '''
 
 def FizzBuzz(n: int) -> None:
+    ''' Straightforward implementation'''
     for i in range(1, n+1):
         if i % 15 == 0:
             print('FizzBuzz')
@@ -40,3 +41,12 @@ def FizzBuzz(n: int) -> None:
             print(i)
 
 FizzBuzz(15)
+
+def fizz_buzz(n):
+    '''Sophisticated solution using dictionary and join'''
+    for i in range(1, n + 1):
+        output = {3: "Fizz", 5: "Buzz"}
+        result = "".join(v for k, v in output.items() if i % k == 0)
+        print(result or i)
+
+fizz_buzz(15)
