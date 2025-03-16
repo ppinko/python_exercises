@@ -1,3 +1,5 @@
+from collections import Counter
+
 """
 Valid Anagram
 
@@ -29,10 +31,21 @@ Bonus Challenge:
 
 def validAnagram_1(s: str, t: str) -> bool:
     """
-    Using sorting method. The simplest method.
+    Using sorting method. The simplest method. Complexity O(n log n).
     """
     return sorted(s) == sorted(t)
 
 
 print(validAnagram_1("listen", "silent"))  # True
 print(validAnagram_1("hello", "world"))  # False
+
+
+def validAnagram_2(s: str, t: str) -> bool:
+    """
+    Using Counter. Complexity O(n).
+    """
+    return Counter(s) == Counter(t)
+
+
+print(validAnagram_2("listen", "silent"))  # True
+print(validAnagram_2("hello", "world"))  # False
