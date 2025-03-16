@@ -46,3 +46,22 @@ def majorityElement_2(nums: list[int]) -> int:
 
 print(majorityElement_2([3, 2, 2, 3, 2]))  # 2
 print(majorityElement_2([2, 2, 1, 1, 1, 2, 2]))  # 2
+
+
+def majority_element_3(nums):
+    """
+    Using Boyer-Moore Voting Algorithm
+    """
+    candidate, count = None, 0
+
+    for num in nums:
+        if count == 0:
+            candidate = num  # Set new candidate
+        count += 1 if num == candidate else -1  # Increase or decrease count
+
+    return candidate
+
+
+# Example usage
+print(majority_element_3([3, 2, 2, 3, 2]))  # 2
+print(majority_element_3([2, 2, 1, 1, 1, 2, 2]))  # Output: 2
