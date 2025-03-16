@@ -48,3 +48,21 @@ s3 = "pwwkew"
 print(longest_substring_without_repeating_characters(s1))
 print(longest_substring_without_repeating_characters(s2))
 print(longest_substring_without_repeating_characters(s3))
+
+
+def longest_unique_substring(s):
+    seen = set()
+    left = max_length = 0
+
+    for right in range(len(s)):
+        while s[right] in seen:  # Remove characters from the left until unique
+            seen.remove(s[left])
+            left += 1
+        seen.add(s[right])
+        max_length = max(max_length, right - left + 1)
+
+    return max_length
+
+print(longest_unique_substring(s1))
+print(longest_unique_substring(s2))
+print(longest_unique_substring(s3))
