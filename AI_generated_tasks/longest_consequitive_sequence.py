@@ -31,6 +31,8 @@ def longest_consequitive_sequence_v1(nums: list[int]) -> int:
     for i, v in enumerate(nums):
         if counter == 0:
             counter += 1
+        elif v == nums[i - 1]:
+            pass  # skip duplications
         elif v - nums[i - 1] == 1:
             counter += 1
         else:
