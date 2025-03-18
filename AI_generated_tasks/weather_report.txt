@@ -1,0 +1,4 @@
+Temperature: 279.17
+Humidity: 64
+Wind Speed: 4.63
+Condition: clear sky

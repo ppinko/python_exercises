@@ -35,24 +35,60 @@ Bonus Challenge:
 - Automatically detect the user's location and fetch weather for it.
 """
 
+import requests
+
 
 def fetch_weather_data(city: str) -> dict:
-    pass
+    api_key = "eb8c49f1efdd4079765d6555a58bcd2a"
+    response = requests.get(
+        f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
+    )
+    if response.status_code != 200:
+        print("Error fetching data:", response.text)
+        return {}
+    return response.json()
+
+
+"""
+{'coord': {'lon': -0.1257, 'lat': 51.5085}, 
+'weather': [{'id': 800, 'main': 'Clear', 'description': 'clear sky', 'icon': '01n'}], 
+'base': 'stations', 
+'main': {'temp': 279.21, 'feels_like': 275.99, 'temp_min': 278.13, 
+'temp_max': 280.64, 'pressure': 1022, 'humidity': 64, 'sea_level': 1022, 
+'grnd_level': 1018}, 
+'visibility': 10000, 
+'wind': {'speed': 4.63, 'deg': 70}, 
+'clouds': {'all': 0}, 'dt': 1742324573, 'sys': {'type': 2, 'id': 2091269, 
+'country': 'GB', 'sunrise': 1742278059, 'sunset': 1742321368}, 'timezone': 0, 
+'id': 2643743, 'name': 'London', 'cod': 200}
+"""
 
 
 def process_weather_data(data: dict) -> dict:
-    pass
+    if not data:
+        return {}
+    temperature = data["main"]["temp"]
+    humidity = data["main"]["humidity"]
+    wind_speed = data["wind"]["speed"]
+    condition = data["weather"][0]["description"]
+    return {
+        "Temperature": temperature,
+        "Humidity": humidity,
+        "Wind Speed": wind_speed,
+        "Condition": condition,
+    }
 
 
 def save_to_report(data: dict, filename: str) -> None:
-    pass
+    with open(filename, "w") as file:
+        for key, value in data.items():
+            file.write(f"{key}: {value}\n")
 
 
 def main(city: str) -> None:
     data = fetch_weather_data(city)
     processed_data = process_weather_data(data)
     save_to_report(processed_data, "weather_report.txt")
-    pass
 
 
 if __name__ == "__main__":
