@@ -48,7 +48,11 @@ def log_file_analyzer(input_file: str, output_file: str) -> None:
     try:
         with open(input_file, "r") as file:
             for line in file:
-                user = line.split(" - ")[1].strip().lower()
+                try:
+                    user = line.split(" - ")[1].strip().lower()
+                except IndexError:
+                    print(f"Error: Invalid log entry: {line}")
+                    continue
                 user_login_count[user] = user_login_count.get(user, 0) + 1
                 max_login_count = max(max_login_count, user_login_count[user])
 

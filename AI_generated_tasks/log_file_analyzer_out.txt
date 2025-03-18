@@ -1,5 +1,6 @@
 User Login Count:
 Alice: 3
 Bob: 3
+Tom: 1
 
 Most Active User: Alice, Bob (3 logins each)
