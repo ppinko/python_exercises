@@ -88,3 +88,14 @@ def word_frequency_counter_2(input_file, output_file):
 
     except FileNotFoundError:
         print(f"Error: {input_file} not found.")
+
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) != 3:
+        print(
+            "Usage: python word_frequency_counter_from_file.py input_file output_file"
+        )
+    else:
+        word_frequency_counter_2(sys.argv[1], sys.argv[2])
