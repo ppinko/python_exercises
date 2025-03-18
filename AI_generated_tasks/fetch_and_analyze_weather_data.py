@@ -40,28 +40,14 @@ import requests
 
 def fetch_weather_data(city: str) -> dict:
     api_key = "eb8c49f1efdd4079765d6555a58bcd2a"
-    response = requests.get(
-        f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
-    )
+    try:
+        response = requests.get(
+            f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
+        )
     if response.status_code != 200:
         print("Error fetching data:", response.text)
         return {}
     return response.json()
-
-
-"""
-{'coord': {'lon': -0.1257, 'lat': 51.5085}, 
-'weather': [{'id': 800, 'main': 'Clear', 'description': 'clear sky', 'icon': '01n'}], 
-'base': 'stations', 
-'main': {'temp': 279.21, 'feels_like': 275.99, 'temp_min': 278.13, 
-'temp_max': 280.64, 'pressure': 1022, 'humidity': 64, 'sea_level': 1022, 
-'grnd_level': 1018}, 
-'visibility': 10000, 
-'wind': {'speed': 4.63, 'deg': 70}, 
-'clouds': {'all': 0}, 'dt': 1742324573, 'sys': {'type': 2, 'id': 2091269, 
-'country': 'GB', 'sunrise': 1742278059, 'sunset': 1742321368}, 'timezone': 0, 
-'id': 2643743, 'name': 'London', 'cod': 200}
-"""
 
 
 def process_weather_data(data: dict) -> dict:
@@ -72,9 +58,9 @@ def process_weather_data(data: dict) -> dict:
     wind_speed = data["wind"]["speed"]
     condition = data["weather"][0]["description"]
     return {
-        "Temperature": temperature,
-        "Humidity": humidity,
-        "Wind Speed": wind_speed,
+        "Temperature": f"{temperature - 273.15:.1f}°C",
+        "Humidity": f"{humidity:.1f}%",
+        "Wind Speed": f"{wind_speed:.1f} m/s",
         "Condition": condition,
     }
 
