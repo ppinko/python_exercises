@@ -44,10 +44,13 @@ def fetch_weather_data(city: str) -> dict:
         response = requests.get(
             f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
         )
-    if response.status_code != 200:
-        print("Error fetching data:", response.text)
-        return {}
-    return response.json()
+        if response.status_code != 200:
+            print("Error fetching data:", response.text)
+            return {}
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Network error: {e}")
+        return None
 
 
 def process_weather_data(data: dict) -> dict:
