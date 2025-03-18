@@ -59,3 +59,32 @@ word_frequency_counter(
     "word_frequency_counter_from_file_in.txt",
     "word_frequency_counter_from_file_out.txt",
 )
+
+import re
+from collections import Counter
+
+
+def word_frequency_counter_2(input_file, output_file):
+    try:
+        # Read the input file
+        with open(input_file, "r", encoding="utf-8") as file:
+            text = file.read().lower()  # Convert to lowercase
+
+        # Remove punctuation and split into words
+        words = re.findall(r"\b\w+\b", text)
+
+        # Count word occurrences
+        word_counts = Counter(words)
+
+        # Sort by frequency (descending) and then alphabetically
+        sorted_words = sorted(word_counts.items(), key=lambda x: (-x[1], x[0]))
+
+        # Write results to output file
+        with open(output_file, "w", encoding="utf-8") as file:
+            for word, count in sorted_words:
+                file.write(f"{word}: {count}\n")
+
+        print(f"Word frequencies written to {output_file}")
+
+    except FileNotFoundError:
+        print(f"Error: {input_file} not found.")
