@@ -39,7 +39,7 @@ def fetch_news_headlines_from_sky_news() -> list:
             f.write(response.text)
         soup = BeautifulSoup(response.text, "html.parser")
         headline_tags = soup.find_all('a', class_='ui-story-headline')
-        return [headline_tag.get('data-title') for headline_tag in headline_tags]
+        return [headline_tag.get('data-title') for headline_tag in headline_tags if headline_tag.get('data-title').strip() != ""] 
     except requests.exceptions.RequestException as e:
         print(f"Network error: {e}")
         return []
