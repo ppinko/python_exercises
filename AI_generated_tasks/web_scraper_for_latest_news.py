@@ -22,3 +22,23 @@ Constraints:
 ✅ Handle network errors gracefully.
 ✅ Extract only clean text (remove unnecessary HTML tags).
 """
+
+from bs4 import BeautifulSoup
+import requests
+
+def fetch_news_headlines_from_sky_news() -> list:
+    try:
+        response = requests.get('https://news.sky.com/')
+        if response.status_code != 200:
+            print("Error fetching data:", response.text)
+            return []
+        with open("news_headlines.txt", "w") as f:
+            f.write(response.text)
+        soup = BeautifulSoup(response.text, "html.parser")
+        headline_tags = soup.find_all('a', class_='ui-story-headline')
+        return [headline_tag.get('data-title') for headline_tag in headline_tags]
+    except requests.exceptions.RequestException as e:
+        print(f"Network error: {e}")
+        return []
+
+print(fetch_news_headlines_from_sky_news())
