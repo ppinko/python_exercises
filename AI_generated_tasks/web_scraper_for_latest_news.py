@@ -27,6 +27,9 @@ from bs4 import BeautifulSoup
 import requests
 
 def fetch_news_headlines_from_sky_news() -> list:
+    '''
+    Fetches the latest news headlines from Sky news.
+    '''
     try:
         response = requests.get('https://news.sky.com/')
         if response.status_code != 200:
@@ -41,4 +44,23 @@ def fetch_news_headlines_from_sky_news() -> list:
         print(f"Network error: {e}")
         return []
 
-print(fetch_news_headlines_from_sky_news())
+def tee_headlines(headlines: list) -> None:
+    '''
+    Saves the headlines to a file and prints them to the console.
+    '''
+    with open("news_headlines.txt", "w") as f:
+        f.write("Latest News Headlines:\n")
+        print("Latest News Headlines:\n")
+        for i, headline in enumerate(headlines):
+            f.write(f"{i+1}. {headline}\n")
+            print(f"{i+1}. {headline}")
+
+def main():
+    headlines = fetch_news_headlines_from_sky_news()
+    if headlines:
+        tee_headlines(headlines)
+    else:
+        print("No headlines found.")
+
+if __name__ == "__main__":
+    main()
