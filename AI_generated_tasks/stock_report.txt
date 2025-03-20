@@ -1,0 +1,7 @@
+Stock Report for AAPL:
+Current Price: 216.15
+Opening Price: 216.1988
+High: 216.43
+Low: 216.15
+Change: -0.02
+Trend: Falling
