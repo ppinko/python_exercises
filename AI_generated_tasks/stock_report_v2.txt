@@ -1,0 +1,6 @@
+Stock Report for TSLA:
+Current Price: $235.86
+Opening Price: $231.61
+High: $241.41
+Low: $229.20
+Change: 1.83% 📈 Rising
