@@ -33,12 +33,12 @@ Bonus Challenge:
 ⭐ Plot stock price history using matplotlib.
 '''
 
-ALPHA_VANTAGE_KEY = 'AI10GJUNG3GPLO2A'
-
 import requests
 import csv
 import sys
 
+ALPHA_VANTAGE_KEY = 'AI10GJUNG3GPLO2A'
+OUT_FILE = "stock_report.csv"
 
 def fetch_stock_price(ticker: str) -> dict:
     '''
@@ -81,28 +81,35 @@ def analyze_stock_price(data: dict) -> dict:
         "Trend": trend
     }
     
-def save_stock_report(ticker: str, analysis: dict) -> None:
+def save_stock_report(ticker: str, analysis: dict, writer) -> None:
     '''
     Saves the stock price analysis to a file.
     '''
-    with open("stock_report.txt", "w") as f:
-        f.write(f"Stock Report for {ticker}:\n")
-        for key, value in analysis.items():
-            f.write(f"{key}: {value}\n")
-        
-        print(f"Stock Report for {ticker}:")
-        for key, value in analysis.items():
-            print(f"{key}: {value}")
+    writer.writerow([ticker, analysis["Current Price"], analysis["Opening Price"], analysis["High"], analysis["Low"], analysis["Change"], analysis["Trend"]])
+    
+    print(f"Stock Report for {ticker}:")
+    for key, value in analysis.items():
+        print(f"{key}: {value}")
+    print()
         
 def main():
-    tickers = sys.argv[1:] if len(sys.argv) > 1 else ["AAPL"]
-    for ticker in tickers:
-        data = fetch_stock_price(ticker)
-        analysis = analyze_stock_price(data)
-        if analysis:
-            save_stock_report(ticker, analysis)
-        else:
-            print(f"No data found for {ticker}.")   
+    if len(sys.argv) < 2:
+        print("Please provide at least one stock ticker.")
+        return
+    tickers = sys.argv[1:]  # Get stock tickers from command-line arguments
+    
+    headers = ["Ticker", "Current Price", "Opening Price", "High", "Low", "Change", "Trend"]
+    with open(OUT_FILE, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(headers)
+        
+        for ticker in tickers:
+            data = fetch_stock_price(ticker)
+            analysis = analyze_stock_price(data)
+            if analysis:
+                save_stock_report(ticker, analysis, writer)
+            else:
+                print(f"No data found for {ticker}.")   
             
 if __name__ == "__main__":
     main()  # Run the program
