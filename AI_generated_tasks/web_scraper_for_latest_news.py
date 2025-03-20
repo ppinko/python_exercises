@@ -31,7 +31,7 @@ def fetch_news_headlines_from_sky_news() -> list:
     Fetches the latest news headlines from Sky news.
     '''
     try:
-        response = requests.get('https://news.sky.com/')
+        response = requests.get('https://news.sky.com/', timeout=10)
         if response.status_code != 200:
             print("Error fetching data:", response.text)
             return []
