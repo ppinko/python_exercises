@@ -32,3 +32,25 @@ Bonus Challenge:
 ⭐ Allow the user to search multiple movies at once.
 ⭐ Fetch Rotten Tomatoes ratings along with IMDb ratings.
 """
+
+
+def fetch_movie_ratings(search_term: str) -> list:
+    """
+    Fetches movie ratings from IMDb for a given search term.
+    """
+    pass
+
+
+def tee_movie_ratings(movie_ratings: list) -> None:
+    """
+    Saves the movie ratings to a file and prints the top-rated movie to the console.
+    """
+    pass
+
+
+def main():
+    pass
+
+
+if __name__ == "__main__":
+    main()
