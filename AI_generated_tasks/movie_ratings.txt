@@ -1,0 +1,4 @@
+Movie title: Guardians of the Galaxy Vol. 2
+Metacritic: 67
+IMDb: 7.6
+Rotten Tomatoes: 85%

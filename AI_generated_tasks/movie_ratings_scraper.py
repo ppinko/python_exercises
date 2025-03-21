@@ -33,24 +33,55 @@ Bonus Challenge:
 ⭐ Fetch Rotten Tomatoes ratings along with IMDb ratings.
 """
 
+import requests
 
-def fetch_movie_ratings(search_term: str) -> list:
+_OMDB_API_KEY = "f86594"
+
+
+def fetch_movie_ratings(movie_title: str) -> dict:
     """
     Fetches movie ratings from IMDb for a given search term.
     """
-    pass
+    request: requests.Response = requests.get(
+        f"http://www.omdbapi.com/?apikey={_OMDB_API_KEY}&t={movie_title}"
+    )
+    if request.status_code != 200:
+        print("Error fetching data:", request.text)
+        return []
+    movie_data: dict = request.json()
+    ratings: dict = {
+        "Metacritic": movie_data.get("Metascore"),
+        "IMDb": movie_data.get("imdbRating"),
+    }
+    for rating in movie_data.get("Ratings"):
+        if rating["Source"] == "Rotten Tomatoes":
+            ratings["Rotten Tomatoes"] = rating["Value"]
+    return ratings
 
 
-def tee_movie_ratings(movie_ratings: list) -> None:
+def tee_movie_ratings(output_file: str, movie_title: str, movie_ratings: dict) -> None:
     """
     Saves the movie ratings to a file and prints the top-rated movie to the console.
     """
-    pass
+    with open(output_file, "w") as f:
+        f.write(f"Movie title: {movie_title}\n")
+        print(f"Movie title: {movie_title}")
+        for source, rating in movie_ratings.items():
+            f.write(f"{source}: {rating}\n")
+            print(f"{source}: {rating}")
 
 
-def main():
-    pass
+def main(output_file: str, movie_title: str) -> None:
+    movie_data: dict = fetch_movie_ratings(movie_title)
+    tee_movie_ratings(output_file, movie_title, movie_data)
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+
+    if len(sys.argv) != 3:
+        print("Usage: python movie_ratings_scraper.py <output_file> <movie_title>")
+        sys.exit(1)
+    output_file = sys.argv[1]
+    movie_title = sys.argv[2]
+    main(output_file, movie_title)
