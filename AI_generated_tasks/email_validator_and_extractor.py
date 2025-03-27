@@ -47,24 +47,21 @@ def main(file_path: str) -> None:
     email_regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
     # Extract all emails from the text
-    emails = re.findall(email_regex, text)
+    valid_emails = re.findall(email_regex, text)
 
-    # Validate the emails
-    valid_emails = []
-    for email in emails:
-        if re.fullmatch(email_regex, email):
-            valid_emails.append(email)
+    # Lowercase all emails
+    valid_emails = [email.lower() for email in valid_emails]
 
     # Remove duplicates
     valid_emails = list(set(valid_emails))
 
     # Sort the emails alphabetically
-    valid_emails.sort()
+    valid_emails.sort(reverse=False)
 
     # Save the valid emails to valid_emails.txt
     with open("valid_emails.txt", "w") as file:
         file.write("Valid Emails Found:\n")
-        for i, email in enumerate(valid_emails, 1):
+        for i, email in enumerate(iterable=valid_emails, start=1):
             file.write(f"{i}. {email}\n")
 
     # Print the number of unique valid emails found
