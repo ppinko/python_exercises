@@ -34,3 +34,46 @@ Bonus Challenge:
 ⭐ Support multiple file inputs at once.
 ⭐ Count and display email domains (e.g., example.com: 1 email).
 """
+
+import re
+import sys
+
+
+def main(file_path: str) -> None:
+    with open(file_path, "r") as file:
+        text = file.read()
+
+    # Regular expression for email validation
+    email_regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+
+    # Extract all emails from the text
+    emails = re.findall(email_regex, text)
+
+    # Validate the emails
+    valid_emails = []
+    for email in emails:
+        if re.fullmatch(email_regex, email):
+            valid_emails.append(email)
+
+    # Remove duplicates
+    valid_emails = list(set(valid_emails))
+
+    # Sort the emails alphabetically
+    valid_emails.sort()
+
+    # Save the valid emails to valid_emails.txt
+    with open("valid_emails.txt", "w") as file:
+        file.write("Valid Emails Found:\n")
+        for i, email in enumerate(valid_emails, 1):
+            file.write(f"{i}. {email}\n")
+
+    # Print the number of unique valid emails found
+    print(f"Found {len(valid_emails)} unique valid emails. ✅")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        main(sys.argv[1])
+    else:
+        print("Usage: python email_validator_and_extractor.py <file_path>")
+        sys.exit(1)
