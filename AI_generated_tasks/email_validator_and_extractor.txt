@@ -1,0 +1,4 @@
+Hello John, please contact me at john.doe@example.com.
+Support team: support@company.org
+Invalid emails: test@.com, @missinguser.com, noatsign.com
+Reach out at: info@website.net or sales@business.io
