@@ -15,7 +15,6 @@ Valid Emails Found:
 14. notanemail@site.com
 15. promo@business.io
 16. sales@business.io
-17. someone@invalid..com
-18. subscribe@newsletter.com
-19. support@company.org
-20. unsubscribe@newsletter.com
+17. subscribe@newsletter.com
+18. support@company.org
+19. unsubscribe@newsletter.com
