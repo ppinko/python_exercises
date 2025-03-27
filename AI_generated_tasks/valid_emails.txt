@@ -1,5 +1,21 @@
 Valid Emails Found:
-1. info@website.net
-2. john.doe@example.com
-3. sales@business.io
-4. support@company.org
+1. admin@secure.net
+2. alice123@example.com
+3. career@corporate.org
+4. contact@event.com
+5. double@dots.com
+6. event@conference.net
+7. help@company.org
+8. hr@corporate.org
+9. info@website.net
+10. jobs@corporate.org
+11. john.doe@example.com
+12. john.doe@myemail.com
+13. noreply@notifications.com
+14. notanemail@site.com
+15. promo@business.io
+16. sales@business.io
+17. someone@invalid..com
+18. subscribe@newsletter.com
+19. support@company.org
+20. unsubscribe@newsletter.com

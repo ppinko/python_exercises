@@ -1,0 +1,15 @@
+Hey Alice, my new email is alice123@example.com.  
+Please update your records. You can also reach me at alice123@example.com (yes, it's the same!).  
+For support, contact help@company.org or support@company.org.  
+Invalid emails: test@.com, @wrong.com, missingatsign.com, another@@double.com  
+
+Marketing team: sales@business.io, promo@business.io, SALES@BUSINESS.IO  
+John uses john.doe@myemail.com and sometimes john.doe@myemail.com (duplicate!).  
+Random text with gibberish: xyz@random, someone@invalid..com, !notanemail@site.com  
+Conference details sent to: event@conference.net, RSVP at contact@event.com  
+
+Trusted contacts: admin@secure.net, noreply@notifications.com  
+Our newsletter: subscribe@newsletter.com, unsubscribe@newsletter.com, SUBSCRIBE@NEWSLETTER.COM  
+
+HR emails: hr@corporate.org, jobs@corporate.org, career@corporate.org  
+Oops, this one is incorrect: ..double@dots.com  

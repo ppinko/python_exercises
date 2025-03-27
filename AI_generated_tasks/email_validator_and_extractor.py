@@ -39,15 +39,32 @@ import re
 import sys
 
 
-def main(file_path: str) -> None:
-    with open(file_path, "r") as file:
-        text = file.read()
+def main(file_path: list[str]) -> None:
+    """
+    This function reads text files containing random text and emails.
+    Extracts all valid email addresses using regular expressions.
+
+    @param file_path: list[str] - A list of file paths
+    @return None - It saves the valid emails to valid_emails.txt and prints the
+    number of unique valid emails found.
+    """
 
     # Regular expression for email validation
     email_regex = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
 
-    # Extract all emails from the text
-    valid_emails = re.findall(email_regex, text)
+    valid_emails = []
+
+    for file in file_path:
+        try:
+            with open(file, "r") as f:
+                text = f.read()
+
+                # Extract all emails from the text
+                valid_emails.extend(re.findall(email_regex, text))
+
+        except FileNotFoundError:
+            print(f"File {file} not found. ❌")
+            sys.exit(1)
 
     # Lowercase all emails
     valid_emails = [email.lower() for email in valid_emails]
@@ -70,7 +87,7 @@ def main(file_path: str) -> None:
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        main(sys.argv[1])
+        main(sys.argv[1:])
     else:
         print("Usage: python email_validator_and_extractor.py <file_path>")
         sys.exit(1)
