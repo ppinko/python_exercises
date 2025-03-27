@@ -1,0 +1,8 @@
+Invalid Emails Found:
+1. ..double@dots.com
+2. alice123@example.com.
+3. john.doe@example.com.
+4. someone@invalid..com
+5. support@company.org.
+6. test@.com
+7. xyz@random

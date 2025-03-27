@@ -49,12 +49,16 @@ def main(file_path: list[str]) -> None:
     number of unique valid emails found.
     """
 
-    # Corrected regular expression for email validation
+    # Regular expression for email validation
     email_regex = (
         r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Z|a-z]{2,}\b"
     )
 
+    # Regular expression for invalid emails
+    invalid_emails_regex = r"[\w\.-]+@[\w\.-]+"
+
     valid_emails = []
+    invalid_emails = []
 
     for file in file_path:
         try:
@@ -63,6 +67,7 @@ def main(file_path: list[str]) -> None:
 
                 # Extract all emails from the text
                 valid_emails.extend(re.findall(email_regex, text))
+                invalid_emails.extend(re.findall(invalid_emails_regex, text))
 
         except FileNotFoundError:
             print(f"File {file} not found. ❌")
@@ -70,12 +75,18 @@ def main(file_path: list[str]) -> None:
 
     # Lowercase all emails
     valid_emails = [email.lower() for email in valid_emails]
+    invalid_emails = [email.lower() for email in invalid_emails]
 
     # Remove duplicates
     valid_emails = list(set(valid_emails))
+    invalid_emails = list(set(invalid_emails))
+
+    # Remove invalid emails from valid emails
+    invalid_emails = [email for email in invalid_emails if email not in valid_emails]
 
     # Sort the emails alphabetically
     valid_emails.sort(reverse=False)
+    invalid_emails.sort(reverse=False)
 
     # Save the valid emails to valid_emails.txt
     with open("valid_emails.txt", "w") as file:
@@ -85,6 +96,15 @@ def main(file_path: list[str]) -> None:
 
     # Print the number of unique valid emails found
     print(f"Found {len(valid_emails)} unique valid emails. ✅")
+
+    # Save the invalid emails to invalid_emails.txt
+    with open("invalid_emails.txt", "w") as file:
+        file.write("Invalid Emails Found:\n")
+        for i, email in enumerate(iterable=invalid_emails, start=1):
+            file.write(f"{i}. {email}\n")
+
+    # Print the number of unique invalid emails found
+    print(f"Found {len(invalid_emails)} unique invalid emails. ❌")
 
 
 if __name__ == "__main__":
