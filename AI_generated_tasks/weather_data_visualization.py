@@ -37,19 +37,14 @@ Bonus Challenge:
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Use a non-interactive backend to avoid Qt platform plugin errors
-import matplotlib
-
-# matplotlib.use("Agg")
-
 
 def main():
     # Read temperature data from CSV file
-    df = pd.read_csv("weather_data.csv")
+    df: pd.DataFrame = pd.read_csv("weather_data.csv")
 
     # Extract dates and temperatures
-    dates = df["Date"]
-    temperatures = df["Temperature"]
+    dates: pd.Series = df["Date"]
+    temperatures: pd.Series = df["Temperature"]
 
     # Plot daily temperature changes
     plt.figure(figsize=(10, 6))
@@ -61,14 +56,14 @@ def main():
     plt.grid(False)
 
     # Add moving average trendline
-    moving_avg = temperatures.rolling(window=3, center=True).mean()
+    moving_avg: pd.Series = temperatures.rolling(window=3, center=True).mean()
     plt.plot(dates, moving_avg, color="orange", label="Moving Average")
 
     # Highlght cold days (< 11°C) in blue
-    cold_days = df[df["Temperature"] < 11]
+    cold_days: pd.Series = df[df["Temperature"] < 11]
 
     # Highlight hot days (> 20°C) in red
-    hot_days = df[df["Temperature"] > 20]
+    hot_days: pd.Series = df[df["Temperature"] > 20]
 
     # Scatter plot for hot and cold days
     plt.scatter(
@@ -88,13 +83,8 @@ def main():
         label="Cold Days",
     )
 
-    # Add legend
     plt.legend()
-
-    # Save the plot as an image file
     plt.savefig("weather_plot.png")
-
-    # Display the plot
     plt.show()
 
 
