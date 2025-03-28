@@ -60,6 +60,10 @@ def main():
     plt.ylabel("Temperature [°C]")
     plt.grid(False)
 
+    # Add moving average trendline
+    moving_avg = temperatures.rolling(window=3, center=True).mean()
+    plt.plot(dates, moving_avg, color="orange", label="Moving Average")
+
     # Highlght cold days (< 11°C) in blue
     cold_days = df[df["Temperature"] < 11]
 
