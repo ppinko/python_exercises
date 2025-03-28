@@ -37,6 +37,11 @@ Bonus Challenge:
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Use a non-interactive backend to avoid Qt platform plugin errors
+import matplotlib
+
+# matplotlib.use("Agg")
+
 
 def main():
     # Read temperature data from CSV file
@@ -48,28 +53,35 @@ def main():
 
     # Plot daily temperature changes
     plt.figure(figsize=(10, 6))
-    plt.plot(dates, temperatures, marker="o", color="green", label="Temperature")
+    plt.plot(dates, temperatures, color="green", label="Temperature")
+    plt.xticks(rotation=90)
     plt.title("Daily Temperature Changes")
     plt.xlabel("Date")
     plt.ylabel("Temperature [°C]")
-    plt.grid(True)
+    plt.grid(False)
 
-    # Highlight the hottest and coldest days
-    hottest_day = df[df["Temperature"] == df["Temperature"].max()]
-    coldest_day = df[df["Temperature"] == df["Temperature"].min()]
-    plt.plot(
-        hottest_day["Date"],
-        hottest_day["Temperature"],
+    # Highlght cold days (< 11°C) in blue
+    cold_days = df[df["Temperature"] < 11]
+
+    # Highlight hot days (> 20°C) in red
+    hot_days = df[df["Temperature"] > 20]
+
+    # Scatter plot for hot and cold days
+    plt.scatter(
+        x=hot_days["Date"],
+        y=hot_days["Temperature"],
         marker="o",
+        s=50,
         color="red",
-        label="Hottest Day",
+        label="Hot Days",
     )
-    plt.plot(
-        coldest_day["Date"],
-        coldest_day["Temperature"],
+    plt.scatter(
+        x=cold_days["Date"],
+        y=cold_days["Temperature"],
         marker="o",
-        color="green",
-        label="Coldest Day",
+        s=50,
+        color="blue",
+        label="Cold Days",
     )
 
     # Add legend
